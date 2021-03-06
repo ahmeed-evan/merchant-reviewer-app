@@ -56,22 +56,26 @@
 </template>
 
 <script>
-import ReviewField from '../components/ReviewField'
+import ReviewField from "../components/ReviewField";
+import axios from "axios";
+
 export default {
   components: {
     ReviewField,
   },
+  props: ["merchantId"],
   data() {
-    return {
-      selectedMerchant: {
-        merchantName: "Evan",
-        merchantLogo: ".. /assets/deliman-logo.svg",
-        merchantRatingValue: 3.5,
-        reviewCount: 50,
-        merchantAddress: "8502 Preston Rd. Inglewood, Maine 98380",
-        merchantContactNumber: "(907) 555-0101",
-      },
-    };
+    return {};
+  },
+
+  created() {
+    const response = axios.get("http://localhost:8080/merchant/get-merchant", {
+      params: this.merchantId,
+    });
+
+    if (response != null) {
+      console.log(response.body);
+    }
   },
 };
 </script>

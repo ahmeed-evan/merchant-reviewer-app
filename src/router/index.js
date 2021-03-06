@@ -15,17 +15,17 @@ const routes = [
     component: Login
   },
   {
-    path: '/review',
-    name:'Review',
-    component:Review
+    path: '/review/:merchantId',
+    name: 'Review',
+    component: Review
   },
   {
-    path:'/',
-    name:'MerchantQuery',
+    path: '/',
+    name: 'MerchantQuery',
     component: MerchantQuery
   },
   {
-    path:"/add-merchant",
+    path: "/add-merchant",
     name: 'AddMerchant',
     component: AddMerchant
   }

@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row class="grey-lighten-3 top-view" align="center">
         <v-col lg="8" md="8" sm="8">
-          <div @click="$router.push('/')">
+          <div @click="backToHome">
             <ul>
               <li class="logo"><img src="../assets/deliman-logo.svg" /></li>
             </ul>
@@ -32,6 +32,13 @@
 import { mapGetters } from "vuex";
 
 export default {
+  methods: {
+    backToHome() {
+      if (this.isLoggedIn) {
+        this.$router.push("/");
+      }
+    },
+  },
   computed: {
     ...mapGetters(["isLoggedIn", "getUserProfile"]),
   },

@@ -23,10 +23,10 @@ export default {
 
   beforeMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$router.replace("/");
-      } else {
+      if (!user) {
         this.$router.replace("/login");
+      } else {
+        this.$router.replace("/");
       }
     });
   },

@@ -23,7 +23,6 @@ const actions = {
                 commit("setUser", user);
             }
         });
-
     },
 
     async logout({ commit }) {
