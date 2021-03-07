@@ -1,67 +1,68 @@
 <template>
   <div class="review-input-field">
     <v-container class="mt-4 pb-4">
-      <v-form>
-        <v-row no-gutters class="d-flex justify-center">
-          <v-col lg="6" md="6" sm="12">
-            <v-rating
-              background-color="grey lighten-1"
-              color="orange"
-              large
-              class="d-flex justify-center"
-            ></v-rating>
-            <v-textarea
-              class="font-weight-light"
-              auto-grow
-              outlined
-              rows="3"
-              row-height="40"
-              shaped
-              label="Type your review"
-              value=""
-            ></v-textarea>
-            <v-col class="text-right pa-0">
-              <v-btn color="#00BFA5" dark>Submit</v-btn>
-            </v-col>
+      <v-row no-gutters class="d-flex justify-center">
+        <v-col lg="6" md="6" sm="12">
+          <v-rating
+            v-model="reviewDetails.merchantRating"
+            background-color="grey lighten-1"
+            color="orange"
+            large
+            class="d-flex justify-center"
+            value=""
+          ></v-rating>
+          <v-textarea
+            v-model="reviewDetails.reviewComment"
+            class="font-weight-light"
+            auto-grow
+            outlined
+            rows="3"
+            color="grey darken-1"
+            row-height="40"
+            shaped
+            label="Type your review"
+            value=""
+          ></v-textarea>
+          <v-col class="text-right pa-0">
+            <v-btn @click="submit" color="#00BFA5" dark>Submit</v-btn>
           </v-col>
-        </v-row>
-      </v-form>
+        </v-col>
+      </v-row>
     </v-container>
     <div class="review-list">
       <v-container class="mt-4 pb-4">
         <v-row
-          v-for="reviewInfo in reviewInfo"
-          :key="reviewInfo.personName"
+          v-for="review in reviewInfo"
+          :key="review.reviewDate"
           no-gutters
           class="d-flex justify-center pb-10"
         >
           <v-col lg="6" md="6" sm="12">
             <v-row class="mr-0" justify="end"
-              ><p class="caption">{{ reviewInfo.reviewDate }}</p></v-row
+              ><p class="caption">{{ review.reviewCreated }}</p></v-row
             >
             <v-card>
               <v-row no-gutters class="pt-2">
                 <v-col lg="5" md="5" sm="5">
                   <v-card-title>
-                    <v-icon left> mdi-account </v-icon>
-                    <span class="body-1 font-weight-light">{{
-                      reviewInfo.personName
+                    <v-avatar size="20" class="grey lighten-2">
+                      <img :src="review.userPictureUrl" />
+                    </v-avatar>
+                    <span class="body-1 ml-2 font-weight-light">{{
+                      review.userName
                     }}</span>
                   </v-card-title>
                 </v-col>
                 <v-col
-                  ><span class="caption font-weight-light"
-                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-                    soluta minus corporis nostrum at quibusdam ipsum fugit enim
-                    suscipit, alias earum rerum laboriosam iure est recusandae,
-                    culpa voluptas quisquam deserunt.</span
-                  ></v-col
+                  ><span class="caption font-weight-light">{{
+                    review.reviewComment
+                  }}</span></v-col
                 >
               </v-row>
-              <v-row class="ml-3">
+              <v-row class="ml-2">
                 <v-rating
                   readonly
-                  v-model="reviewInfo.givenReview"
+                  v-model="review.merchantRating"
                   background-color="white"
                   color="orange"
                   small
@@ -78,24 +79,26 @@
 export default {
   data() {
     return {
-      reviewInfo: [
-        {
-          personName: "Evan Ahmed",
-          givenReview: 4.5,
-          reviewDate: "feb-10-2021",
-        },
-        {
-          personName: "Tanveer Ahmed",
-          givenReview: 5.0,
-          reviewDate: "feb-12-2021",
-        },
-        {
-          personName: "Razib",
-          givenReview: 3.0,
-          reviewDate: "feb-15-2021",
-        },
-      ],
+      reviewInfo: [],
+      reviewDetails: {
+        merchantRating: 0,
+        reviewComment: "",
+        userName: "",
+        userEmail: "",
+        userPictureUrl: "",
+      },
     };
+  },
+
+  methods: {
+    submit() {
+      console.log(this.reviewDetails);
+    },
+
+    mounted() {
+      const user = this.$store.getters.getUserProfile;
+      console.log("hello" + user);
+    },
   },
 };
 </script>

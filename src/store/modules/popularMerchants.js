@@ -28,20 +28,6 @@ const state = {
             merchantRatingValue: 5.0,
             reviewCount: 530,
         },
-        {
-            id: 5,
-            merchantName: "p_Mou",
-            merchantLogo: "../assets/deliman-logo.svg",
-            merchantRatingValue: 4.5,
-            reviewCount: 520,
-        },
-        {
-            id: 6,
-            merchantName: "p_Nowshad",
-            merchantLogo: "../assets/deliman-logo.svg",
-            merchantRatingValue: 3.1,
-            reviewCount: 22,
-        },
     ]
 };
 

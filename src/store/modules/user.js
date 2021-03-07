@@ -20,6 +20,7 @@ const actions = {
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
+                console.log(user.providerId);
                 commit("setUser", user);
             }
         });
@@ -41,8 +42,11 @@ const mutations = {
     setUser(state, user) {
         state.isLoggedIn = true;
         state.userProfile = {
-            name: user.displayName,
-            picture: user.photoURL
+            userName: user.displayName,
+            userPictureUrl: user.photoURL,
+            userEmail: user.email,
+            token: user.getIdToken,
+            loginSource: user.providerId
         };
     },
     userLogout(state) {

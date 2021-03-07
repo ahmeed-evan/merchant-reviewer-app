@@ -17,7 +17,8 @@ const routes = [
   {
     path: '/review/:merchantId',
     name: 'Review',
-    component: Review
+    component: Review,
+    props:true
   },
   {
     path: '/',

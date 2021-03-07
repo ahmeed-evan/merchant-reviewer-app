@@ -6,7 +6,10 @@ const state = {
 };
 
 const getters = {
-    getMerchantsList: (state) => state.merchantList
+    getMerchantsList: (state) => state.merchantList,
+    getMerchantByMerchantId: (state) => (id) => {
+        return state.merchantList.find(merchant => merchant.merchantId === id);
+    }
 };
 
 const actions = {

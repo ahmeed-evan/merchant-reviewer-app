@@ -21,10 +21,10 @@
           <v-row v-if="isLoggedIn" no-gutters class="px-4" align="center">
             <v-col>
               <v-avatar size="40" class="white dakern-3 mr-4">
-                <img :src="getUserProfile.picture" />
+                <img :src="getUserProfile.userPictureUrl" />
               </v-avatar>
               <span class="profile-name font-weight-light white--text">
-                {{ getUserProfile.name }}
+                {{ getUserProfile.userName }}
               </span></v-col
             >
             <v-col lg="3" md="5" sm="5"
@@ -51,7 +51,8 @@ export default {
   name: "Navbar",
 
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     ...mapActions(["logout"]),
