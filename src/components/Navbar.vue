@@ -56,6 +56,9 @@ export default {
   },
   methods: {
     ...mapActions(["logout"]),
+    logoutTest(){
+      console.log(this.getUserProfile);
+    }
   },
 
   computed: {

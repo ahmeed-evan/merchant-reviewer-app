@@ -25,9 +25,7 @@
                   ></v-rating>
                 </v-col>
                 <v-col class="ma-1">
-                  <span class="ma-1 caption">
-                    {{ merchantAvgRating }}/5
-                  </span>
+                  <span class="ma-1 caption"> {{ merchantAvgRating }}/5 </span>
                 </v-col>
                 <v-col class="ma-1">
                   <v-icon class="pb-1"> mdi-account</v-icon>
@@ -39,17 +37,18 @@
         </v-row>
         <span
           ><p class="caption mt-5 text-no-wrap">
-            {{merchantAddress }}
+            {{ merchantAddress }}
           </p></span
         >
         <span
-          ><p class="caption text-no-wrap">+880
-             {{merchantPhoneNumber }}
+          ><p class="caption text-no-wrap">
+            +880
+            {{ merchantPhoneNumber }}
           </p></span
         >
       </v-container>
     </div>
-    <ReviewField />
+    <ReviewField :merchantId="merchantId" />
   </div>
 </template>
 
@@ -75,13 +74,13 @@ export default {
 
   created() {
     let merchant = this.$store.getters.getMerchantByMerchantId(this.merchantId);
-    this.merchantBusinessName=merchant.merchantBusinessName;
-    this.merchantFacebookLink=merchant.merchantFacebookLink;
-    this.merchantAddress=merchant.merchantAddress;
-    this.merchantEmail=merchant.merchantEmail;
-    this.merchantPhoneNumber=merchant.merchantPhoneNumber;
-    this.merchantAvgRating=merchant.merchantAvgRating;
-    this.totalReview=merchant.totalReview;
+    this.merchantBusinessName = merchant.merchantBusinessName;
+    this.merchantFacebookLink = merchant.merchantFacebookLink;
+    this.merchantAddress = merchant.merchantAddress;
+    this.merchantEmail = merchant.merchantEmail;
+    this.merchantPhoneNumber = merchant.merchantPhoneNumber;
+    this.merchantAvgRating = merchant.merchantAvgRating;
+    this.totalReview = merchant.totalReview;
   },
 };
 </script>

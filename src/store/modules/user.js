@@ -1,7 +1,13 @@
+
 import firebase from 'firebase';
 const state = {
 
-    userProfile: {},
+    userProfile: {
+        userName: "",
+        userPictureUrl: "",
+        userEmail: "",
+        token: ""
+    },
     isLoggedIn: false
 };
 
@@ -20,8 +26,10 @@ const actions = {
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                console.log(user.providerId);
+
+                console.log(user.refreshToken);
                 commit("setUser", user);
+
             }
         });
     },
@@ -45,13 +53,17 @@ const mutations = {
             userName: user.displayName,
             userPictureUrl: user.photoURL,
             userEmail: user.email,
-            token: user.getIdToken,
-            loginSource: user.providerId
+            token: user.refreshToken,
         };
     },
     userLogout(state) {
         state.isLoggedIn = false;
-        state.userProfile = {};
+        state.userProfile = {
+            userName: "",
+            userPictureUrl: "",
+            userEmail: "",
+            token: ""
+        };
     }
 };
 

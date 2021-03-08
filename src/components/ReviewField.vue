@@ -53,8 +53,8 @@
                     }}</span>
                   </v-card-title>
                 </v-col>
-                <v-col
-                  ><span class="caption font-weight-light">{{
+                <v-col lg="7" md="7"
+                  ><span class="caption font-weight-light pr-1">{{
                     review.reviewComment
                   }}</span></v-col
                 >
@@ -76,7 +76,11 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
+  props: ["merchantId"],
+
   data() {
     return {
       reviewInfo: [],
@@ -92,13 +96,37 @@ export default {
 
   methods: {
     submit() {
-      console.log(this.reviewDetails);
-    },
+      if (this.reviewDetails.merchantRating > 0) {
+        axios
+          .post(
+            "http://localhost:8080/merchant/get-merchant/" +
+              this.merchantId +
+              "/review",
+            this.reviewDetails
+          )
+          .catch((err) => alert(err.message));
 
-    mounted() {
-      const user = this.$store.getters.getUserProfile;
-      console.log("hello" + user);
+        window.location.reload();
+      }
     },
+  },
+
+  created() {
+    let user = this.$store.getters.getUserProfile;
+    this.reviewDetails.userName = user.userName;
+    this.reviewDetails.userEmail = user.userEmail;
+    this.reviewDetails.userPictureUrl = user.userPictureUrl;
+  },
+
+  mounted() {
+    axios
+      .get(
+        "http://localhost:8080/merchant/get-merchant/" +
+          this.merchantId +
+          "/review"
+      )
+      .then((res) => (this.reviewInfo = res.data))
+      .catch((err) => alert(err.message));
   },
 };
 </script>
