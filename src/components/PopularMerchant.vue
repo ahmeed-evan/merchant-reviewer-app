@@ -3,40 +3,46 @@
     <span class="d-flex justify-center">Most popular Merchants</span>
     <v-row class="d-flex justify-start">
       <v-col
-        v-for="merchant in getPopularMerchantList"
-        :key="merchant.merchantName"
+        v-for="merchant in getPopularMerchants"
+        :key="merchant.merchantId"
         class="mt-4"
         sm="6"
         md="4"
         lg="3"
         cols="12"
       >
-        <v-card text class="text-start">
+        <v-card
+          @click="goToReview(merchant.merchantId)"
+          text
+          class="text-start"
+        >
           <v-responsive class="pa-4">
             <v-avatar size="40" class="grey lighten-2">
-              <img :src="merchant.merchantLogo" />
+              <img :src="merchant.merchantFacebookLink" />
             </v-avatar>
           </v-responsive>
-          <span class="caption pa-4"> {{ merchant.merchantName }} </span>
+          <span class="caption pa-4">
+            {{ merchant.merchantBusinessName }}
+          </span>
           <v-divider class="mt-2"></v-divider>
           <v-row class="justify-space-between">
             <v-col>
               <v-rating
                 readonly
-                v-model="merchant.merchantRatingValue"
+                v-model="merchant.merchantAvgRating"
                 background-color="orange lighten-3"
                 color="orange"
                 small
               ></v-rating>
             </v-col>
             <v-col class="ma-1">
-              <span class="ma-1 caption">
-                {{ merchant.merchantRatingValue }}/5
+              <span class="ma-1 caption" >
+                {{ merchant.merchantAvgRating }}/5
               </span>
             </v-col>
             <v-col class="ma-1">
               <v-icon class="pb-1"> mdi-account</v-icon>
-              <span class="caption ml-1">{{ merchant.reviewCount }}</span>
+              <span class="caption ml-1">{{ merchant.totalReview }}</span>
             </v-col>
           </v-row>
         </v-card>
@@ -45,11 +51,20 @@
   </v-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapActions,mapGetters } from "vuex";
 
 export default {
+  methods: {
+    ...mapActions(["fetchAllPopularMerchants"]),
+    goToReview(merchantId) {
+      this.$router.push({ name: "Review", params: { merchantId: merchantId } });
+    },
+  },
   computed: {
-    ...mapGetters(["getPopularMerchantList"]),
+    ...mapGetters(["getPopularMerchants"]),
+  },
+  created() {
+    this.fetchAllPopularMerchants();
   },
 };
 </script>

@@ -135,6 +135,7 @@ export default {
           .then((res) => console.log(res))
           .catch((err) => alert(err.message));
         this.dialog = false;
+        this.$router.replace('/')
       }
     },
   },

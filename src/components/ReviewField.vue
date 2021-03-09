@@ -24,7 +24,7 @@
             value=""
           ></v-textarea>
           <v-col class="text-right pa-0">
-            <v-btn @click="submit" color="#00BFA5" dark>Submit</v-btn>
+            <v-btn @click.native="submit" color="#00BFA5" dark>Submit</v-btn>
           </v-col>
         </v-col>
       </v-row>
@@ -105,7 +105,6 @@ export default {
             this.reviewDetails
           )
           .catch((err) => alert(err.message));
-
         window.location.reload();
       }
     },

@@ -68,19 +68,33 @@ export default {
       merchantPhoneNumber: "",
       merchantAvgRating: 0,
       totalReview: 0,
-      merchantId: this.$route.params.merchantId,
+      merchantId: "",
     };
   },
 
   created() {
-    let merchant = this.$store.getters.getMerchantByMerchantId(this.merchantId);
-    this.merchantBusinessName = merchant.merchantBusinessName;
-    this.merchantFacebookLink = merchant.merchantFacebookLink;
-    this.merchantAddress = merchant.merchantAddress;
-    this.merchantEmail = merchant.merchantEmail;
-    this.merchantPhoneNumber = merchant.merchantPhoneNumber;
-    this.merchantAvgRating = merchant.merchantAvgRating;
-    this.totalReview = merchant.totalReview;
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.getMerchant();
+      }
+    );
+    this.getMerchant();
+  },
+  methods: {
+    getMerchant() {
+      this.merchantId = this.$route.params.merchantId;
+      let merchant = this.$store.getters.getMerchantByMerchantId(
+        this.merchantId
+      );
+      this.merchantBusinessName = merchant.merchantBusinessName;
+      this.merchantFacebookLink = merchant.merchantFacebookLink;
+      this.merchantAddress = merchant.merchantAddress;
+      this.merchantEmail = merchant.merchantEmail;
+      this.merchantPhoneNumber = merchant.merchantPhoneNumber;
+      this.merchantAvgRating = merchant.merchantAvgRating;
+      this.totalReview = merchant.totalReview;
+    },
   },
 };
 </script>

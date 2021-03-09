@@ -51,14 +51,10 @@ export default {
   name: "Navbar",
 
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     ...mapActions(["logout"]),
-    logoutTest(){
-      console.log(this.getUserProfile);
-    }
   },
 
   computed: {
