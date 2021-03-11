@@ -26,10 +26,9 @@ const actions = {
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-
-                console.log(user.refreshToken);
+                localStorage.setItem('token',user.refreshToken)
                 commit("setUser", user);
-
+                this.$router.push('/')
             }
         });
     },

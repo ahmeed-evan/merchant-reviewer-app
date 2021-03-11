@@ -25,7 +25,7 @@
         </v-col>
         <v-col class="text-center">
           <v-btn
-            @click="loginWithGoogle"
+            @click="loginGoogle"
             block
             dark
             color="red lighten-1 font-weight-light"
@@ -44,7 +44,13 @@ export default {
   name: "Login",
 
   methods: {
-    ...mapActions(["loginWithGoogle"]),
+    ...mapActions({
+      loginWithGoogle: "loginWithGoogle",
+      async loginGoogle() {
+        await this.loginWithGoogle();
+        this.$router.push("/");
+      },
+    }),
   },
 };
 </script>

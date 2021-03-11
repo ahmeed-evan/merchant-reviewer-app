@@ -95,16 +95,14 @@ export default {
   },
 
   methods: {
-    submit() {
+    async submit() {
       if (this.reviewDetails.merchantRating > 0) {
-        axios
-          .post(
-            "http://localhost:8080/merchant/get-merchant/" +
-              this.merchantId +
-              "/review",
-            this.reviewDetails
-          )
-          .catch((err) => alert(err.message));
+        await axios.post(
+          "http://localhost:8080/merchant/get-merchant/" +
+            this.merchantId +
+            "/review",
+          this.reviewDetails
+        );
         window.location.reload();
       }
     },
