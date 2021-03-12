@@ -90,7 +90,6 @@
 <script>
 import axios from "axios";
 
-
 export default {
   data() {
     return {
@@ -125,21 +124,20 @@ export default {
   },
 
   methods: {
-    addMerchant() {
+    async addMerchant() {
       if (this.$refs.form.validate()) {
-        axios
+        await axios
           .post(
             "http://localhost:8080/merchant/add-merchant",
             this.merchantInfo
           )
           .then((res) => console.log(res))
           .catch((err) => alert(err.message));
-        this.dialog = false;
-        this.$router.replace('/')
       }
+      this.dialog = false;
+      this.$router.replace("/");
     },
   },
-
 };
 </script>
 
